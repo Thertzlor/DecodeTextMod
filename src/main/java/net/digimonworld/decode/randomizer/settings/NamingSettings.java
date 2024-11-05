@@ -134,8 +134,8 @@ public class NamingSettings implements Setting {
         public String original;
         public String replacement;
         private final List<String> excludedTerms;
-        private final ArrayList<PathPosition> disabledPaths = new ArrayList();
-        private final ArrayList<PathPosition> enabledPaths = new ArrayList();
+        private final ArrayList<PathPosition> disabledPaths = new ArrayList<PathPosition>();
+        private final ArrayList<PathPosition> enabledPaths = new ArrayList<PathPosition>();
         private final int matchLength;
         private int index = -1;
         /**
@@ -457,15 +457,15 @@ public class NamingSettings implements Setting {
         private Tuple<Integer, String> adjustForNewlines(String text) {
             Matcher spaceMatch = Pattern.compile(original.replaceAll(" ", "(\\\\s)")).matcher(text);
             if (!spaceMatch.find()) {
-                return new Tuple(-1, replacement);
+                return new Tuple<Integer,String>(-1, replacement);
             } else {
                 int first = spaceMatch.start();
                 if (!replacement.contains(" ")) {
-                    return new Tuple(first, replacement + "\n");
+                    return new Tuple<Integer, String>(first, replacement + "\n");
                 }
                 String[] repSplit = replacement.split(" ");
                 if (repSplit.length == 2) {
-                    return new Tuple(first, repSplit[0] + "\n" + repSplit[1]);
+                    return new Tuple<Integer, String>(first, repSplit[0] + "\n" + repSplit[1]);
                 }
                 int spaceLoc = 0;
                 int spaceDex = 0;
@@ -484,16 +484,16 @@ public class NamingSettings implements Setting {
                     }
                 }
                 if (spaceDex >= replacement.length()) {
-                    return new Tuple(first, replacement + "\n");
+                    return new Tuple<Integer,String>(first, replacement + "\n");
                 }
 
                 int firstBefore = replacement.substring(0, spaceDex).lastIndexOf(" ");
                 int firstAfter = replacement.substring(spaceDex).indexOf(" ");
                 if (firstAfter == -1 && firstBefore == -1) {
-                    return new Tuple(first, replacement + "\n");
+                    return new Tuple<Integer, String>(first, replacement + "\n");
                 }
                 int finalSpace = firstAfter == -1 ? firstBefore : firstBefore == -1 ? firstAfter : Math.min(firstAfter, firstBefore) == firstBefore ? firstBefore : firstAfter;
-                return new Tuple(first, replacement.substring(0, finalSpace) + "\n" + replacement.substring(finalSpace + 1));
+                return new Tuple<Integer, String>(first, replacement.substring(0, finalSpace) + "\n" + replacement.substring(finalSpace + 1));
             }
 
         }
@@ -503,8 +503,8 @@ public class NamingSettings implements Setting {
             if (idx == -1 && original.contains(" ") && text.contains("\n")) {
                 return adjustForNewlines(text);
             }
-            //If any of the exclusion 
-            return new Tuple((idx == -1 || termExclusion(text, idx) || (path != null && (pathExclusion(path, idx) || isOverlapping(path, idx)))) ? -1 : idx, replacement);
+            //If any of the exclusions match, we return -1
+            return new Tuple<Integer, String>((idx == -1 || termExclusion(text, idx) || (path != null && (pathExclusion(path, idx) || isOverlapping(path, idx)))) ? -1 : idx, replacement);
         }
 
     }
@@ -840,7 +840,7 @@ public class NamingSettings implements Setting {
 
             //Sorting our replacements by length to avoid lobger replacements getting overriding by prior partial matches.
             List<Replacement> sortedReps = repMap.values().stream().sorted(Comparator.comparing(v -> v.original.length() * -1)).collect(Collectors.toList());
-            ArrayList<Tuple<String, BTXEntry>> fileEntries = new ArrayList();
+            ArrayList<Tuple<String, BTXEntry>> fileEntries = new ArrayList<Tuple<String, BTXEntry>>();
             Utils.listFiles(startDir).stream()
                     //Everything that could contain BTX
                     .filter(s -> s.getName().endsWith("_jp.res")
@@ -871,7 +871,7 @@ public class NamingSettings implements Setting {
                             for (int i = 0; i < elements.size(); i++) {
                                 var payload = (BTXPayload) elements.get(i);
                                 String partialPath = normalPath.toString() + "\\" + (i);
-                                payload.getEntries().forEach(bt -> fileEntries.add(new Tuple(partialPath + ":" + bt.getKey(), bt.getValue())));
+                                payload.getEntries().forEach(bt -> fileEntries.add(new Tuple<String, BTXPayload.BTXEntry>(partialPath + ":" + bt.getKey(), bt.getValue())));
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
