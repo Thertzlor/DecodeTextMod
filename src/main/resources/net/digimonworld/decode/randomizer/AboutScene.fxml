@@ -9,14 +9,16 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
 
-<Stage title="About DWRDD Randomizer" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.digimonworld.decode.randomizer.AboutWindowController">
+<Stage title="About DWRDD Randomizer"
+   xmlns="http://javafx.com/javafx/15.0.1"
+   xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.digimonworld.decode.randomizer.AboutWindowController">
    <scene>
       <Scene>
          <DialogPane>
             <content>
                <VBox maxWidth="250.0" spacing="20.0">
                   <children>
-                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Digimon World Re:Digitize Decode Randomizer&#10;Version ${project.version}&#10;&#10;Developed by Syd Montague" textAlignment="CENTER">
+                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Digimon World Re:Digitize Decode Randomizer&#10;Version ${project.version}&#10;&#10;Developed by Theigno based on DWRDD Randomizer by SydMontague.&#10;&#10;(Paypal)" textAlignment="CENTER">
                         <VBox.margin>
                            <Insets />
                         </VBox.margin>

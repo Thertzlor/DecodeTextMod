@@ -22,26 +22,12 @@ import net.digimonworld.decode.randomizer.RandoLogger.LogLevel;
 import net.digimonworld.decode.randomizer.RandomizationContext;
 
 public class RandomizerSettings {
-    private SkillsSettings skillSettings = new SkillsSettings();
-    private DigimonSettings digimonSettings = new DigimonSettings();
-    private EvolutionSettings evolutionSettings = new EvolutionSettings();
-    private StarterSettings starterSettings = new StarterSettings();
-    private WorldSettings worldSettings = new WorldSettings();
-    private PatchSettings patchSettings = new PatchSettings();
-    private PlayerSettings playerSettings = new PlayerSettings();
+
     private NamingSettings namingSettings = new NamingSettings();
 
     public void randomize(RandomizationContext context) {
         logSettings(context);
-
         namingSettings.randomize(context);
-        patchSettings.randomize(context);
-        skillSettings.randomize(context);
-        digimonSettings.randomize(context);
-        evolutionSettings.randomize(context);
-        starterSettings.randomize(context);
-        worldSettings.randomize(context);
-        playerSettings.randomize(context);
     }
 
     private void logSettings(RandomizationContext context) {
@@ -81,36 +67,15 @@ public class RandomizerSettings {
 
     private List<Tuple<String, List<Setting>>> getSettingsMap() {
         return List.of(
-                Tuple.of("General",
-                        Arrays.asList(digimonSettings, evolutionSettings, skillSettings, worldSettings, patchSettings)),
-                Tuple.of("New Game", Arrays.asList(starterSettings, playerSettings)),
                 Tuple.of("Patch Names", Arrays.asList(namingSettings)));
     }
 
     public Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<>();
-        map.put("skillSettings", skillSettings.serialize());
-        map.put("digimonSettings", digimonSettings.serialize());
-        map.put("evolutionSettings", evolutionSettings.serialize());
-        map.put("starterSettings", starterSettings.serialize());
-        map.put("worldSettings", worldSettings.serialize());
-        map.put("patchSettings", patchSettings.serialize());
-        map.put("playerSettings", playerSettings.serialize());
         map.put("namingSettings", namingSettings.serialize());
-
         return map;
     }
 
     public void load(YamlMapping map) {
-        if (map == null)
-            return;
-
-        skillSettings.load(map.yamlMapping("skillSettings"));
-        digimonSettings.load(map.yamlMapping("digimonSettings"));
-        evolutionSettings.load(map.yamlMapping("evolutionSettings"));
-        starterSettings.load(map.yamlMapping("starterSettings"));
-        worldSettings.load(map.yamlMapping("worldSettings"));
-        patchSettings.load(map.yamlMapping("patchSettings"));
-        playerSettings.load(map.yamlMapping("playerSettings"));
     }
 }

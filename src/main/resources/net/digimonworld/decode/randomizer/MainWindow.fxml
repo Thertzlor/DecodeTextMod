@@ -17,12 +17,14 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.ToggleSwitch?>
 
-<Scene fx:id="root" stylesheets="@main.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.digimonworld.decode.randomizer.MainWindowController">
+<Scene fx:id="root" stylesheets="@main.css"
+   xmlns="http://javafx.com/javafx/15.0.1"
+   xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.digimonworld.decode.randomizer.MainWindowController">
    <BorderPane fx:id="rootPane" minWidth="600.0">
       <center>
          <SplitPane dividerPositions="0.0" orientation="VERTICAL">
             <items>
-                <AnchorPane SplitPane.resizableWithParent="false">
+               <AnchorPane SplitPane.resizableWithParent="false">
                   <children>
                      <HBox alignment="CENTER_LEFT" layoutX="96.0" layoutY="14.0" spacing="4.0" AnchorPane.leftAnchor="0.0">
                         <children>
@@ -38,8 +40,6 @@
                            <Button mnemonicParsing="false" onAction="#createRandomSeed" text="Random Seed" />
                         </children>
                      </HBox>
-                     <Button layoutX="498.0" layoutY="48.0" mnemonicParsing="false" onAction="#onLoadSettings" text="Load Settings" AnchorPane.rightAnchor="0.0" />
-                     <Button layoutX="520.0" layoutY="81.0" mnemonicParsing="false" onAction="#onSaveSettings" text="Save Settings" AnchorPane.rightAnchor="0.0" />
                      <Button layoutX="510.0" layoutY="125.0" mnemonicParsing="false" onAction="#onRandomize" text="Randomize" AnchorPane.rightAnchor="0.0" />
                      <ToggleSwitch fx:id="raceLogging" layoutX="14.0" layoutY="129.0" text="Race Logging" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                         <tooltip>
@@ -79,18 +79,18 @@
       </center>
       <top>
          <MenuBar BorderPane.alignment="CENTER">
-           <menus>
-             <Menu mnemonicParsing="false" text="File">
-               <items>
-                 <MenuItem mnemonicParsing="false" onAction="#onClose" text="Close" />
-               </items>
-             </Menu>
-             <Menu mnemonicParsing="false" text="Help">
-               <items>
-                 <MenuItem mnemonicParsing="false" onAction="#onAbout" text="About" />
-               </items>
-             </Menu>
-           </menus>
+            <menus>
+               <Menu mnemonicParsing="false" text="File">
+                  <items>
+                     <MenuItem mnemonicParsing="false" onAction="#onClose" text="Close" />
+                  </items>
+               </Menu>
+               <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                     <MenuItem mnemonicParsing="false" onAction="#onAbout" text="About" />
+                  </items>
+               </Menu>
+            </menus>
          </MenuBar>
       </top>
    </BorderPane>

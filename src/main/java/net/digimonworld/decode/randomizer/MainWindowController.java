@@ -1,24 +1,18 @@
 package net.digimonworld.decode.randomizer;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 import org.controlsfx.control.ToggleSwitch;
 
-import com.amihaiemil.eoyaml.Yaml;
-import com.amihaiemil.eoyaml.YamlMapping;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -221,47 +215,7 @@ public class MainWindowController {
         return Utils.parseLongOrDefault(input, input.isBlank() ? new Random().nextLong() : input.hashCode());
     }
     
-    @FXML
-    public void onSaveSettings() throws IOException {
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Where to save the settings?");
-        chooser.setInitialDirectory(new File("."));
-        chooser.getExtensionFilters().add(new ExtensionFilter("YAML", "*.yml"));
-        
-        File selected = chooser.showSaveDialog(root.getWindow());
-        
-        if (selected == null)
-            return;
-        
-        Map<String, Object> configMap = new HashMap<>();
-        
-        configMap.put("seed", seedField.getText());
-        configMap.put("settings", settings.serialize());
-        configMap.put("raceLogging", raceLogging.isSelected());
-        
-        try (BufferedWriter writer = Files.newBufferedWriter(selected.toPath(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
-            Yaml.createYamlPrinter(writer).print(Yaml.createYamlDump(configMap).dump());
-        }
-    }
     
-    @FXML
-    public void onLoadSettings() throws IOException {
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Select the settings to load");
-        chooser.setInitialDirectory(new File("."));
-        chooser.getExtensionFilters().add(new ExtensionFilter("YAML", "*.yml"));
-        File selected = chooser.showOpenDialog(root.getWindow());
-        
-        if (selected == null)
-            return;
-        
-        try (InputStream is = Files.newInputStream(selected.toPath(), StandardOpenOption.READ)) {
-            YamlMapping mapping = Yaml.createYamlInput(is).readYamlMapping();
-            seedField.setText(mapping.string("seed"));
-            raceLogging.setSelected(Boolean.parseBoolean(mapping.string("raceLogging")));
-            settings.load(mapping.yamlMapping("settings"));
-        }
-    }
     
     private void updatedRomStatus() {
         boolean exists = Files.exists(WORKING_PATH);
