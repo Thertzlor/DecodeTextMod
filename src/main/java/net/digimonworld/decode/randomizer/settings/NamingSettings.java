@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Random;
 import java.util.stream.Collectors;
 import java.io.BufferedWriter;
 import java.nio.file.StandardCopyOption;
@@ -62,7 +61,6 @@ public class NamingSettings implements Setting {
 
     private final List<String> skippable = List.of("", "None", "Unused Item", "???", "NO DATA", "n");
     private final BooleanProperty renameEnabled = new SimpleBooleanProperty();
-    private final BooleanProperty randomizeEnabled = new SimpleBooleanProperty();
     private final BooleanProperty camelCase = new SimpleBooleanProperty(true);
     private final BooleanProperty manualCsv = new SimpleBooleanProperty();
     private final BooleanProperty replaceAll = new SimpleBooleanProperty(true);
@@ -70,11 +68,9 @@ public class NamingSettings implements Setting {
     private final BooleanProperty ogre = new SimpleBooleanProperty(false);
     private final BooleanProperty blackPrefix = new SimpleBooleanProperty(false);
     private final Map<String, BooleanProperty> randoMap = new HashMap<>();
-    private final List<String> randoTypes = List.of("Digimon Names", "Finisher Names", "Skill Names", "Character Names", "Item Names", "Medal Names");
     private final List<String> priorities = List.of("_general.csv", "_general_digimon.csv", "DigimonNames.csv", "CardNames1.csv", "FinisherNames.csv");
     private final Map<String, Replacement> repMap = new HashMap<>();
 
-    private Accordion mainAc;
     /**
      * Visualization of a replacement map:
      *
@@ -100,7 +96,7 @@ public class NamingSettings implements Setting {
      * DIGIMONMULTI designates names like WarGreymon or MetalGarurumon.
      *
      * All other DIGIMON names are simply other terms contained in a file
-     * designated as Digijmon name file.
+     * designated as Digimon name file.
      *
      * Everything else is classified as "GENERAL"
      *
@@ -116,13 +112,6 @@ public class NamingSettings implements Setting {
         List<String> digiNamePaths = List.of(11, 27, 28).stream().map(n -> "part0\\arcv\\Keep\\LanguageKeep_jp.res\\" + n).collect(Collectors.toList());
         digiNamePaths.add("_general_digimon.csv");
         return digiNamePaths.contains(path) ? (term.matches(".*[a-z][A-Z].*") ? TermType.DIGIMONMULTI : TermType.DIGIMON) : TermType.GENERAL;
-    }
-
-    private static void btxSwitch(BTXEntry btxA, BTXEntry btxB) {
-        String a = btxA.getString();
-        String b = btxB.getString();
-        btxA.setString(b);
-        btxB.setString(a);
     }
 
     /**
@@ -493,20 +482,13 @@ public class NamingSettings implements Setting {
     @Override
     public TitledPane create(GlobalKeepData data, LanguageKeep language) {
 
-        mainAc = new Accordion();
 
         VBox restoreBox = new VBox(8);
-        VBox randoBox = new VBox(8);
 
         restoreBox.setAlignment(Pos.TOP_LEFT);
-        randoBox.setAlignment(Pos.TOP_LEFT);
 
-        TitledPane pane = new TitledPane("Edit Names", mainAc);
-        TitledPane restorePane = new TitledPane("Restore original names", restoreBox);
-        restorePane.setId("restore");
-        mainAc.setExpandedPane(restorePane);
-        TitledPane randoPane = new TitledPane("Randomize names", randoBox);
-        randoPane.setId("random");
+        TitledPane pane = new TitledPane("Undub/Editing Settings", restoreBox);
+  
 
         pane.setCollapsible(false);
         File csvDir = new File(".\\renamingPresets\\");
@@ -578,17 +560,7 @@ public class NamingSettings implements Setting {
                 pickleCheck,
                 curExp,
                 camelExp);
-        randoBox.getChildren().addAll(
-                JavaFXUtils.buildToggleSwitch("Enabled", Optional.empty(), Optional.of(randomizeEnabled)));
 
-        for (String r : randoTypes) {
-            randoMap.put(r, new SimpleBooleanProperty(false));
-            ToggleSwitch swit = JavaFXUtils.buildToggleSwitch(r, Optional.empty(), Optional.of(randoMap.get(r)));
-            swit.disableProperty().bind(randomizeEnabled.not());
-            randoBox.getChildren().add(swit);
-        }
-
-        mainAc.getPanes().addAll(restorePane, randoPane);
         return pane;
     }
 
@@ -693,12 +665,10 @@ public class NamingSettings implements Setting {
 
     @Override
     public void randomize(RandomizationContext context) {
-        String mode = mainAc.getExpandedPane().getId();
-        if (!(mode.equals("restore") ? renameEnabled.get() : randomizeEnabled.get())) return;
         
 
         PathResolver res = new PathResolver(context);
-        if (mode.equals("restore")) {
+      
             // Main logic for dub -> sub conversion
             try {
                 File manualCsvDir = new File(".\\renamingPresets\\");
@@ -789,37 +759,13 @@ public class NamingSettings implements Setting {
 
             repMap.clear();
             replacementMap.clear();
-
-        } else {
-            //Randomizing different lists of strings
-            Random rand = new Random(context.getInitialSeed() * "ShuffleTerms".hashCode());
-            randoTypes.stream().filter(k -> randoMap.get(k).get()).map(s -> s.replaceAll(" ", "")).forEach(name -> {
-                try {
-                    //creating a list of all btx entries in the payload without empty/filler fields
-                    ArrayList<BTXEntry> entries = new ArrayList<>(res.resolve(name).getValue().getEntries().stream().map(e -> e.getValue()).filter(v -> !skippable.contains(v.getString())).collect(Collectors.toList()));
-
-                    BTXEntry firstEntry = null;
-                    //Switching the value of a random pair of BTX entries and removing them from the list.
-                    while (entries.size() > 1) {
-                        int i = rand.nextInt(entries.size());
-                        BTXEntry btxA = entries.remove(i);
-                        if (firstEntry == null) firstEntry = btxA;
-                        int n = rand.nextInt(entries.size());
-                        BTXEntry btxB = entries.remove(n);
-                        btxSwitch(btxA, btxB);
-                    }
-                    //In case there's an uneven number of entries we switch the leftover entry with the first entry we processed previously
-                    if (entries.size() == 1) btxSwitch(firstEntry, entries.get(0));
-                } catch (ParseException e) {e.printStackTrace();}
-            });
-        }
-    }
+        } 
+    
 
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<>();
         map.put("renameEnabled", renameEnabled.get());
-        map.put("randomizeEnabled", randomizeEnabled.get());
         map.put("camelCase", camelCase.get());
         map.put("manualCsv", manualCsv.get());
         map.put("replaceAll", replaceAll.get());
@@ -838,7 +784,6 @@ public class NamingSettings implements Setting {
         List<String> activeList = list == null ? new ArrayList<>() : list.values().stream().map(a -> a.toString()).collect(Collectors.toList());
         randoMap.forEach((a, b) -> b.set(activeList.contains(a)));
         renameEnabled.set(Boolean.parseBoolean(map.string("renameEnabled")));
-        randomizeEnabled.set(Boolean.parseBoolean(map.string("randomizeEnabled")));
         camelCase.set(Boolean.parseBoolean(map.string("camelCase")));
         manualCsv.set(Boolean.parseBoolean(map.string("manualCsv")));
         replaceAll.set(Boolean.parseBoolean(map.string("replaceAll")));

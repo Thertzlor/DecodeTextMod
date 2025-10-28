@@ -24,10 +24,12 @@ import net.digimonworld.decode.randomizer.RandomizationContext;
 public class RandomizerSettings {
 
     private NamingSettings namingSettings = new NamingSettings();
+    private StringRandomizeSettings stringRandoSettings = new StringRandomizeSettings();
 
     public void randomize(RandomizationContext context) {
         logSettings(context);
         namingSettings.randomize(context);
+        stringRandoSettings.randomize(context);
     }
 
     private void logSettings(RandomizationContext context) {
@@ -67,12 +69,15 @@ public class RandomizerSettings {
 
     private List<Tuple<String, List<Setting>>> getSettingsMap() {
         return List.of(
-                Tuple.of("Patch Names", Arrays.asList(namingSettings)));
+                Tuple.of("Patch Names", Arrays.asList(namingSettings)),
+                Tuple.of("Randomize Names", Arrays.asList(stringRandoSettings))
+                );
     }
 
     public Map<String, Object> serialize() {
         Map<String, Object> map = new HashMap<>();
         map.put("namingSettings", namingSettings.serialize());
+        map.put("stringRandomSettings", stringRandoSettings.serialize());
         return map;
     }
 

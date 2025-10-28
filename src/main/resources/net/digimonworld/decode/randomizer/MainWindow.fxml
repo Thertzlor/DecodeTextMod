@@ -40,7 +40,7 @@
                            <Button mnemonicParsing="false" onAction="#createRandomSeed" text="Random Seed" />
                         </children>
                      </HBox>
-                     <Button layoutX="510.0" layoutY="125.0" mnemonicParsing="false" onAction="#onRandomize" text="Randomize" AnchorPane.rightAnchor="0.0" />
+                     <Button layoutX="510.0" layoutY="125.0" mnemonicParsing="false" onAction="#onRandomize" text="Randomize/Save" AnchorPane.rightAnchor="0.0" />
                      <ToggleSwitch fx:id="raceLogging" layoutX="14.0" layoutY="129.0" text="Race Logging" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                         <tooltip>
                            <Tooltip text="Only log minimal information, &#10;preventing people looking up things in race settings." />
