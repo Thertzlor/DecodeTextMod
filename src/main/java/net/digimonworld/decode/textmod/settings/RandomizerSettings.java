@@ -1,4 +1,4 @@
-package net.digimonworld.decode.randomizer.settings;
+package net.digimonworld.decode.textmod.settings;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -18,8 +18,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.FlowPane;
-import net.digimonworld.decode.randomizer.RandoLogger.LogLevel;
-import net.digimonworld.decode.randomizer.RandomizationContext;
+import net.digimonworld.decode.textmod.RandoLogger.LogLevel;
+import net.digimonworld.decode.textmod.RandomizationContext;
 
 public class RandomizerSettings {
 

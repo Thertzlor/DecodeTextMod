@@ -1,4 +1,4 @@
-package net.digimonworld.decode.randomizer.settings;
+package net.digimonworld.decode.textmod.settings;
 
 import java.util.Map;
 
@@ -7,7 +7,7 @@ import com.amihaiemil.eoyaml.YamlMapping;
 import net.digimonworld.decodetools.data.keepdata.GlobalKeepData;
 import net.digimonworld.decodetools.data.keepdata.LanguageKeep;
 import javafx.scene.control.TitledPane;
-import net.digimonworld.decode.randomizer.RandomizationContext;
+import net.digimonworld.decode.textmod.RandomizationContext;
 
 public interface Setting {
 

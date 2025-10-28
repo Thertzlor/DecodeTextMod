@@ -1,4 +1,4 @@
-package net.digimonworld.decode.randomizer.utils;
+package net.digimonworld.decode.textmod.utils;
 
 import java.util.Optional;
 

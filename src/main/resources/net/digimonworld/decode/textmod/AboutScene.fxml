@@ -11,7 +11,7 @@
 
 <Stage title="About DWRDD Randomizer"
    xmlns="http://javafx.com/javafx/15.0.1"
-   xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.digimonworld.decode.randomizer.AboutWindowController">
+   xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.digimonworld.decode.textmod.AboutWindowController">
    <scene>
       <Scene>
          <DialogPane>

@@ -1,4 +1,4 @@
-package net.digimonworld.decode.randomizer.settings;
+package net.digimonworld.decode.textmod.settings;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,8 +31,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 
-import net.digimonworld.decode.randomizer.RandomizationContext;
-import net.digimonworld.decode.randomizer.utils.JavaFXUtils;
+import net.digimonworld.decode.textmod.RandomizationContext;
+import net.digimonworld.decode.textmod.utils.JavaFXUtils;
 
 public class StringRandomizeSettings implements Setting {
 

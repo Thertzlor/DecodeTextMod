@@ -1,6 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.digimonworld</groupId>
   <artifactId>decode-randomizer</artifactId>
@@ -87,7 +86,7 @@
         <version>0.0.5</version>
         <configuration>
           <launcher>randomizer</launcher>
-          <mainClass>net.digimonworld.decode.decode_randomizer/net.digimonworld.decode.randomizer.Launcher</mainClass>
+          <mainClass>net.digimonworld.decode.decode_randomizer/net.digimonworld.decode.textmod.Launcher</mainClass>
           <compress>2</compress>
           <noHeaderFiles>true</noHeaderFiles>
           <noManPages>true</noManPages>
@@ -106,9 +105,8 @@
             </goals>
             <configuration>
               <transformers>
-                <transformer
-                  implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>net.digimonworld.decode.randomizer.Launcher</mainClass>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>net.digimonworld.decode.textmod.Launcher</mainClass>
                 </transformer>
               </transformers>
             </configuration>

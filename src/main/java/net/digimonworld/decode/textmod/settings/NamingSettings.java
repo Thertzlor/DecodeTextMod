@@ -1,4 +1,4 @@
-package net.digimonworld.decode.randomizer.settings;
+package net.digimonworld.decode.textmod.settings;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
@@ -49,13 +49,12 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.binding.When;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
-import javafx.scene.control.Accordion;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 
-import net.digimonworld.decode.randomizer.RandomizationContext;
-import net.digimonworld.decode.randomizer.utils.JavaFXUtils;
-import net.digimonworld.decode.randomizer.DecodeRandomizer;
+import net.digimonworld.decode.textmod.RandomizationContext;
+import net.digimonworld.decode.textmod.utils.JavaFXUtils;
+import net.digimonworld.decode.textmod.DecodeTextMod;
 
 public class NamingSettings implements Setting {
 
@@ -472,9 +471,9 @@ public class NamingSettings implements Setting {
             e.consume();
             clearExportDir(targetDir);
             try {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(DecodeRandomizer.class.getResourceAsStream("settings/builtinRenamingPreset.csv")));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(DecodeTextMod.class.getResourceAsStream("settings/builtinRenamingPreset.csv")));
                 String pName;
-                while ((pName = reader.readLine()) != null) Files.copy(DecodeRandomizer.class.getResourceAsStream(pName), Path.of(pName), StandardCopyOption.REPLACE_EXISTING);
+                while ((pName = reader.readLine()) != null) Files.copy(DecodeTextMod.class.getResourceAsStream(pName), Path.of(pName), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException exc) {exc.printStackTrace();}
         };
     }
@@ -689,11 +688,11 @@ public class NamingSettings implements Setting {
                         } catch (ParseException e) {e.printStackTrace();}
                     });
                 } else {
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(DecodeRandomizer.class.getResourceAsStream("settings/builtinRenamingPreset.csv")));
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(DecodeTextMod.class.getResourceAsStream("settings/builtinRenamingPreset.csv")));
                     String pName;
                     while ((pName = reader.readLine()) != null) {
 
-                        BufferedReader reader2 = new BufferedReader(new InputStreamReader(DecodeRandomizer.class.getResourceAsStream(pName)));
+                        BufferedReader reader2 = new BufferedReader(new InputStreamReader(DecodeTextMod.class.getResourceAsStream(pName)));
                         String str2;
                         ArrayList<String> foundReps = new ArrayList<>();
                         while ((str2 = reader2.readLine()) != null) foundReps.add(str2);

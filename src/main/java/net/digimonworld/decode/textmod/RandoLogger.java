@@ -1,4 +1,4 @@
-package net.digimonworld.decode.randomizer;
+package net.digimonworld.decode.textmod;
 
 import java.io.IOException;
 import java.io.PrintStream;

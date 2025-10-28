@@ -1,4 +1,4 @@
-package net.digimonworld.decode.randomizer;
+package net.digimonworld.decode.textmod;
 
 import javafx.event.ActionEvent;
 
@@ -12,26 +12,26 @@ public class AboutWindowController {
     private static final String PAYPAL_URL = "https://paypal.me/sydmontague";
     
     public void clickLicense(ActionEvent e) {
-        DecodeRandomizer.getInstance().getHostServices().showDocument(LICENSE_URL);
+        DecodeTextMod.getInstance().getHostServices().showDocument(LICENSE_URL);
     }
     
     public void clickThirdPartyLicense(ActionEvent e) {
-        DecodeRandomizer.getInstance().getHostServices().showDocument(THIRD_PARTY_LICENSE_URL);
+        DecodeTextMod.getInstance().getHostServices().showDocument(THIRD_PARTY_LICENSE_URL);
     }
     
     public void clickGitHub(ActionEvent e) {
-        DecodeRandomizer.getInstance().getHostServices().showDocument(GITHUB_URL);
+        DecodeTextMod.getInstance().getHostServices().showDocument(GITHUB_URL);
     }
     
     public void clickDiscord(ActionEvent e) {
-        DecodeRandomizer.getInstance().getHostServices().showDocument(DISCORD_URL);
+        DecodeTextMod.getInstance().getHostServices().showDocument(DISCORD_URL);
     }
     
     public void clickPatreon(ActionEvent e) {
-        DecodeRandomizer.getInstance().getHostServices().showDocument(PATREON_URL);
+        DecodeTextMod.getInstance().getHostServices().showDocument(PATREON_URL);
     }
     
     public void clickPayPal(ActionEvent e) {
-        DecodeRandomizer.getInstance().getHostServices().showDocument(PAYPAL_URL);
+        DecodeTextMod.getInstance().getHostServices().showDocument(PAYPAL_URL);
     }
 }

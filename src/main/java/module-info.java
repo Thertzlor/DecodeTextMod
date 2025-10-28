@@ -8,6 +8,6 @@ module net.digimonworld.decode.decode_randomizer {
     requires java.logging;
     requires com.amihaiemil.eoyaml;
     
-    opens net.digimonworld.decode.randomizer to javafx.fxml;
-    exports net.digimonworld.decode.randomizer;
+    opens net.digimonworld.decode.textmod to javafx.fxml;
+    exports net.digimonworld.decode.textmod;
 }

@@ -1,4 +1,4 @@
-package net.digimonworld.decode.randomizer;
+package net.digimonworld.decode.textmod;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,8 +30,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-import net.digimonworld.decode.randomizer.settings.RandomizerSettings;
-import net.digimonworld.decode.randomizer.utils.JavaFXUtils;
+import net.digimonworld.decode.textmod.settings.RandomizerSettings;
+import net.digimonworld.decode.textmod.utils.JavaFXUtils;
 import net.digimonworld.decodetools.core.Access;
 import net.digimonworld.decodetools.core.DeleteDirectoryFileVisitor;
 import net.digimonworld.decodetools.core.FileAccess;

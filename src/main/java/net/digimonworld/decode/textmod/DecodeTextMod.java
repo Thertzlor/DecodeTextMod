@@ -1,4 +1,4 @@
-package net.digimonworld.decode.randomizer;
+package net.digimonworld.decode.textmod;
 
 import java.io.IOException;
 
@@ -23,11 +23,11 @@ import javafx.stage.Stage;
  *  - priority randomization (rookies)
  */
 
-public class DecodeRandomizer extends Application {
-    private static DecodeRandomizer instance;
+public class DecodeTextMod extends Application {
+    private static DecodeTextMod instance;
     
-    public DecodeRandomizer() {
-        synchronized (DecodeRandomizer.class) {
+    public DecodeTextMod() {
+        synchronized (DecodeTextMod.class) {
             if (instance == null)
                 instance = this;
             else
@@ -35,13 +35,13 @@ public class DecodeRandomizer extends Application {
         }
     }
     
-    public static DecodeRandomizer getInstance() {
+    public static DecodeTextMod getInstance() {
         return instance;
     }
     
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(DecodeRandomizer.class.getResource("MainWindow.fxml"));
+        FXMLLoader loader = new FXMLLoader(DecodeTextMod.class.getResource("MainWindow.fxml"));
         stage.setScene(loader.load());
         stage.setTitle("Digimon World Re:Digitize Decode Randomizer");
         stage.show();

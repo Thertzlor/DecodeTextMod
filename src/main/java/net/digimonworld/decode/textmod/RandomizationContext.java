@@ -1,4 +1,4 @@
-package net.digimonworld.decode.randomizer;
+package net.digimonworld.decode.textmod;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import net.digimonworld.decode.randomizer.RandoLogger.LogLevel;
+import net.digimonworld.decode.textmod.RandoLogger.LogLevel;
 import net.digimonworld.decodetools.core.Access;
 import net.digimonworld.decodetools.core.FileAccess;
 import net.digimonworld.decodetools.data.digimon.PartnerDigimon;
