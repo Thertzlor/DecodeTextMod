@@ -58,7 +58,7 @@ import net.digimonworld.decode.textmod.DecodeTextMod;
 public class NamingSettings implements Setting {
 
     private final List<String> skippable = List.of("", "None", "Unused Item", "???", "NO DATA", "n");
-    private final BooleanProperty renameEnabled = new SimpleBooleanProperty();
+    private final BooleanProperty renameEnabled = new SimpleBooleanProperty(true);
     private final BooleanProperty camelCase = new SimpleBooleanProperty(true);
     private final BooleanProperty manualCsv = new SimpleBooleanProperty();
     private final BooleanProperty replaceAll = new SimpleBooleanProperty(true);
@@ -510,10 +510,8 @@ public class NamingSettings implements Setting {
 
         manCs.disableProperty().bind(renameEnabled.not());
         repAll.disableProperty().bind(renameEnabled.not());
-        orgeCheck.disableProperty().bind(manLink);
-        blackCheck.disableProperty().bind(manLink);
-        pickleCheck.disableProperty().bind(manLink);
         camel.disableProperty().bind(manLink);
+        blackCheck.disableProperty().bind(manLink);
 
         EventHandler<ActionEvent> rawExportHandler = (ActionEvent event) -> {
             event.consume();
