@@ -16,22 +16,13 @@ import javafx.stage.Stage;
  * - xdelta | Apache 2.0, bundle | https://github.com/jmacd/xdelta
  */
 
-/* TODO features
- * 
- * patches
- *  - camera distance
- *  - priority randomization (rookies)
- */
-
 public class DecodeTextMod extends Application {
     private static DecodeTextMod instance;
     
     public DecodeTextMod() {
         synchronized (DecodeTextMod.class) {
-            if (instance == null)
-                instance = this;
-            else
-                throw new UnsupportedOperationException("Tried to instantiate the App's main class more than once.");
+            if (instance == null) instance = this;
+            else throw new UnsupportedOperationException("Tried to instantiate the App's main class more than once.");
         }
     }
     
