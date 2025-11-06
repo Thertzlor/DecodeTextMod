@@ -125,7 +125,7 @@ public class MainWindowController {
         Alert alert = new Alert(AlertType.NONE);
         alert.setTitle("Extracting ROM...");
         alert.setHeaderText(null);
-        alert.setContentText("Extracting ROM. This might take a minute.");
+        alert.setContentText("Extracting ROM. This might take a few minutes.");
         alert.show();
         
         CompletableFuture.supplyAsync(provideExtractionSupplier(chooser.getSelectedExtensionFilter(), WORKING_PATH, selected.toPath())).thenAccept(a -> Platform.runLater(() -> {
@@ -179,7 +179,7 @@ public class MainWindowController {
         Alert alert = new Alert(AlertType.NONE);
         alert.setTitle("Rebuilding ROM...");
         alert.setHeaderText(null);
-        alert.setContentText("Rebuilding ROM. This might take a minute.");
+        alert.setContentText("Rebuilding ROM. This might take a few minutes.");
         alert.show();
         
         CompletableFuture.runAsync(() -> {

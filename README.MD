@@ -18,7 +18,7 @@ Before using this software make sure you
 
 ## Setup
 
-Download the appropriate version for your OS from the [releases tab](https://github.com/SydMontague/DecodeRandomizer/releases) and unpack the downloaded .zip archive in the location you want to install the textmod tool at.
+Download the appropriate version for your OS from the [releases tab](https://github.com/Thertzlor/DecodeTextMod/releases) and unpack the downloaded .zip archive in the location you want to install the textmod tool at.
 
 Run the `Decode-TextMod.jar`, press the "Select Base ROM" button and navigate to ROM you want to use as base for the textmod tool.
 After the ROM has been successfully unpacked you'll be presented with the editing options.
@@ -119,7 +119,8 @@ Omitting `:4227` prevents any replacments in that file and `*\LanguageKeep_jp.re
 The special value `all` will exclude a replacement from the effect of the `replace terms in ALL text` toggle.
 
 ## Special Files
-There are two special files, `_general.csv` and `_general_digimon.csv` which both do not target specific script files, but will simply replace the specified terms and replacements throughout the game. The only difference between the two is that the contents of `_general_digimon.csv` are affected by Digimon name specific settings such as `camelCase names` and `Always use 'Black' as prefix`, see [editing Settings](#undubediting-settings).
+There are two special files, `_general.csv` and `_general_digimon.csv` which both do not target specific script files, but will simply replace the specified terms and replacements throughout the game.  
+The only difference between the two is that the contents of `_general_digimon.csv` are affected by Digimon name specific settings such as `camelCase names` and `Always use 'Black' as prefix`, see [editing Settings](#undubediting-settings).
 
 # Planned Features
 * Global string randomization.

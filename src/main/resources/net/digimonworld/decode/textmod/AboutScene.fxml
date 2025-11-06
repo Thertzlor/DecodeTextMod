@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
 
-<Stage title="About DWRDD Randomizer"
+<Stage title="About DWRDD TextMod"
    xmlns="http://javafx.com/javafx/15.0.1"
    xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.digimonworld.decode.textmod.AboutWindowController">
    <scene>
@@ -18,7 +18,7 @@
             <content>
                <VBox maxWidth="250.0" spacing="20.0">
                   <children>
-                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Digimon World Re:Digitize Decode Randomizer&#10;Version ${project.version}&#10;&#10;Developed by Theigno based on DWRDD Randomizer by SydMontague.&#10;&#10;(Paypal)" textAlignment="CENTER">
+                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Digimon World Re:Digitize Decode Undub/Text Modification Tool&#10;Version ${project.version}&#10;&#10;Developed by Theigno based on DWRDD Randomizer by SydMontague." textAlignment="CENTER">
                         <VBox.margin>
                            <Insets />
                         </VBox.margin>
@@ -29,6 +29,11 @@
                            <Hyperlink onAction="#clickGitHub" text="GitHub" underline="true" />
                            <Hyperlink onAction="#clickDiscord" text="Discord" underline="true" />
                            <Hyperlink onAction="#clickThirdPartyLicense" text="Third Party License" underline="true" />
+                        </children>
+                     </HBox>
+                     <HBox>
+                        <children>
+                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Support SydMontague, his code does all the tricky parts." textAlignment="CENTER"></Text>
                         </children>
                      </HBox>
                      <HBox alignment="TOP_CENTER">
