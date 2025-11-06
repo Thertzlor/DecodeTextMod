@@ -83,7 +83,7 @@ jobs:
       with:
         name: ${{ matrix.packageName }}
         path: | 
-          target/Decode-Randomizer.jar
+          target/Decode-TextMod.jar
           target/armips${{matrix.executableExtension}}
           target/3dstex${{matrix.executableExtension}}
           target/3dstool${{matrix.executableExtension}}

@@ -27,7 +27,6 @@ import java.util.regex.Pattern;
 import org.controlsfx.control.ToggleSwitch;
 
 import com.amihaiemil.eoyaml.YamlMapping;
-import com.amihaiemil.eoyaml.YamlSequence;
 
 import net.digimonworld.decodetools.data.keepdata.GlobalKeepData;
 import net.digimonworld.decodetools.data.keepdata.LanguageKeep;
@@ -66,7 +65,6 @@ public class NamingSettings implements Setting {
     private final BooleanProperty pickle = new SimpleBooleanProperty(false);
     private final BooleanProperty ogre = new SimpleBooleanProperty(false);
     private final BooleanProperty blackPrefix = new SimpleBooleanProperty(false);
-    private final Map<String, BooleanProperty> randoMap = new HashMap<>();
     private final List<String> priorities = List.of("_general.csv", "_general_digimon.csv", "DigimonNames.csv", "CardNames1.csv", "FinisherNames.csv");
     private final Map<String, Replacement> repMap = new HashMap<>();
 
@@ -179,6 +177,7 @@ public class NamingSettings implements Setting {
         public Replacement(String index, String original, String replacement, String rawExcludedTerms, String rawDisabledPaths, String origin) {
             this.index = Integer.parseInt(index);
             this.original = original;
+            this.global = true;
 
             TermType tType = classifyTerm(replacement, origin);
             //Special modifications only apply to Digimon names
@@ -267,8 +266,7 @@ public class NamingSettings implements Setting {
         }
 
         /**
-         * Replace an entire line for a specific index of a BTX.
-         *
+         * Replace an entire line for a specific index of a BTX.  
          * This method does not check what the line currently contains.
          */
         public void replaceExact(BTXPayload btx, String path) {
@@ -544,7 +542,7 @@ public class NamingSettings implements Setting {
             manualCsv.set(true);
         };
 
-        Button camelExp = new Button("Export CSVs for restoration preset");
+        Button camelExp = new Button("Export CSVs for built-in preset");
         Button curExp = new Button("Export CSVs for current names");
         curExp.setOnAction(rawExportHandler);
         camelExp.setOnAction(buildHandler(csvDir));
@@ -717,7 +715,7 @@ public class NamingSettings implements Setting {
 
             File startDir = new File(".\\working\\part0\\arcv\\");
 
-            //Sorting our replacements by length to avoid lobger replacements getting overriding by prior partial matches.
+            //Sorting our replacements by length to avoid longer replacements getting overriding by prior partial matches.
             List<Replacement> sortedReps = repMap.values().stream().sorted(Comparator.comparing(v -> v.original.length() * -1)).collect(Collectors.toList());
             ArrayList<Tuple<String, BTXEntry>> fileEntries = new ArrayList<Tuple<String, BTXEntry>>();
             Utils.listFiles(startDir).stream()
@@ -771,17 +769,12 @@ public class NamingSettings implements Setting {
         map.put("pickle", pickle.get());
         map.put("ogre", ogre.get());
         map.put("blackPrefix", blackPrefix.get());
-        map.put("randomChecked", randoMap.entrySet().stream().filter(a -> a.getValue().get()).map(Map.Entry::getKey).collect(Collectors.toList()));
         return map;
     }
 
     @Override
     public void load(YamlMapping map) {
         if (map == null) return;
-        
-        YamlSequence list = map.yamlSequence("randomChecked");
-        List<String> activeList = list == null ? new ArrayList<>() : list.values().stream().map(a -> a.toString()).collect(Collectors.toList());
-        randoMap.forEach((a, b) -> b.set(activeList.contains(a)));
         renameEnabled.set(Boolean.parseBoolean(map.string("renameEnabled")));
         camelCase.set(Boolean.parseBoolean(map.string("camelCase")));
         manualCsv.set(Boolean.parseBoolean(map.string("manualCsv")));
