@@ -1,7 +1,7 @@
 # Digimon World Re:Digitize Undub/Text Modification Tool
 This software allows replacing and modifying strings in the 2013 released 3DS game "Digimon World Re:Digitize Decode".
 
-The main motivation for creating this tool was tool is and was replacing the dub terminology of the game's English translation patch by Operation Decode, with the original terms.
+The main motivation for creating this tool was tool is and was replacing the dub terminology of the game's English translation patch by Operation Decoded, with the original terms.
 
 # Usage
 
